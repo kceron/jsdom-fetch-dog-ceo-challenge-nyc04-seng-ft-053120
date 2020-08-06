@@ -1,0 +1,13 @@
+/* to adjust pics according to screen size */
+#dog-image-container{
+    display: flex; 
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.dogphoto {
+    border-radius: 50%;
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+}
