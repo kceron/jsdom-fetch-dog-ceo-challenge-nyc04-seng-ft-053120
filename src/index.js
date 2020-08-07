@@ -4,6 +4,7 @@ const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
 const dogContainer = document.querySelector('#dog-image-container')
 const breedUrl = 'https://dog.ceo/api/breeds/list/all'
 const dogBreedUl = document.getElementById("dog-breeds")
+const dropDown = document.getElementById("breed-dropdown")
 let allBreeds = []
 
 // //  CHALLENGE 1
@@ -14,19 +15,19 @@ fetch(imgUrl) //returns a promise of a response
 })
 
 function addDogImg(dogImg) {
-    const newImgElem = document.createElement("img")
-    newImgElem.src = dogImg
+const newImgElem = document.createElement("img")
+newImgElem.src = dogImg
     newImgElem.className = "dogphoto"
     dogContainer.append(newImgElem)   
 }
-    
+
 // CHALLENGE 2
 fetch(breedUrl)
 .then(function(response) {
-  return response.json();
+    return response.json();
 })
 .then(function(data) {
-  let nestedArr = data.message
+    let nestedArr = data.message
 // helper function to iterate over nestedArr 
 for (const dogBreed in nestedArr) {
     if (nestedArr[dogBreed].length > 0 ) {
@@ -44,5 +45,19 @@ for (const dogBreed in nestedArr) {
 function addBreeds(singleDogBreed){
     const liElem = document.createElement("li")
     liElem.innerText = singleDogBreed
-    dogBreedUl.append(liElem)
+    // console.log(liElem)
+    dogBreedUl.appendChild(liElem)
 }
+
+// CHALLENGE 3
+dogBreedUl.addEventListener("click", (event) =>  {
+    event.target.style.color = "pink" 
+})
+
+// CHALLENGE 4
+dropDown.addEventListener("change", (event)=> {
+    let userInput = event.target.value
+    dogBreedUl.innerHTML = ""
+    const filteredBreeds = allBreeds.filter((breed) => breed.startsWith(userInput)) 
+    filteredBreeds.forEach((breed) => addBreeds(breed))
+})
