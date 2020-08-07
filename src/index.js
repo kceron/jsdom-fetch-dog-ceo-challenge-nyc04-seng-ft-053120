@@ -44,14 +44,16 @@ for (const dogBreed in nestedArr) {
 
 function addBreeds(singleDogBreed){
     const liElem = document.createElement("li")
-    liElem.innerText = singleDogBreed
-    // console.log(liElem)
-    dogBreedUl.appendChild(liElem)
+    liElem.innerHTML = `<li data-info = "breed">${singleDogBreed}</li>`
+    dogBreedUl.append(liElem)
 }
 
 // CHALLENGE 3
-dogBreedUl.addEventListener("click", (event) =>  {
+dogBreedUl.addEventListener("click", function(event) {
+    if(event.target.dataset.info === "breed") {
     event.target.style.color = "pink" 
+    event.target.style.backgroundColor = "green"
+    }
 })
 
 // CHALLENGE 4
